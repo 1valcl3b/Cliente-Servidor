@@ -1,58 +1,71 @@
-# Aplicação Cliente-Servidor com Sockets TCP e UDP
+# Projeto Cliente-Servidor com Sockets TCP e UDP
 
-Este projeto implementa um sistema de comunicação entre cliente e servidor usando sockets TCP e UDP em Python. O servidor é capaz de gerenciar conexões TCP e UDP simultaneamente em diferentes portas e utiliza threads para atender múltiplos clientes TCP ao mesmo tempo.
+Este projeto é uma aplicação básica de cliente-servidor em Python que usa conexões TCP e UDP para comunicação. O servidor consegue lidar com várias conexões TCP ao mesmo tempo usando threads, além de responder a mensagens enviadas por UDP.
 
-Estrutura dos Arquivos
-servidor.py: Código do servidor que escuta as portas TCP (5000) e UDP (5001). O servidor usa threads para atender múltiplos clientes TCP e responde a mensagens UDP.
-cliente.py: Código do cliente que permite enviar mensagens para o servidor usando TCP ou UDP, com resposta recebida e exibida na tela.
-Pré-requisitos
-Python 3 instalado na máquina.
-Clonar ou baixar os arquivos servidor.py e cliente.py.
-Instruções para Execução
-Passo 1: Iniciar o Servidor
-Abra um terminal ou prompt de comando na pasta onde está localizado o arquivo servidor.py.
+## Estrutura dos Arquivos
 
-Execute o seguinte comando para iniciar o servidor:
+- **`servidor.py`**: Servidor combinado (Threads) que escuta conexões TCP na porta 5000 e UDP na porta 5001.
+- **`servidor_tcp.py`**: Versão do servidor TCP.
+- **`servidor_udp.py`**: Versão do servidor UDP
+- **`cliente.py`**: Cliente que permite escolher entre os protocolos TCP e UDP para enviar mensagens ao servidor e exibir a resposta.
 
-bash
-Copiar código
-python3 servidor.py
-O servidor deve exibir mensagens indicando que está escutando conexões TCP na porta 5000 e conexões UDP na porta 5001.
+## Pré-requisitos
 
-Passo 2: Executar o Cliente
-Em um novo terminal ou prompt de comando, navegue até a pasta onde o arquivo cliente.py está salvo.
+- Python 3 deve estar instalado na máquina.
+- Baixe todos os arquivos (`servidor.py`, `servidor_tcp.py`, `servidor_udp.py`, `cliente.py`) para a mesma pasta.
 
-Execute o cliente com o comando:
+## Instruções para Execução
 
-bash
-Copiar código
-python3 cliente.py
-O cliente solicitará que você escolha o protocolo (TCP ou UDP) e insira uma mensagem.
+### Opção 1: Executando o Servidor com Threads (TCP e UDP)
 
-Após enviar a mensagem, o cliente exibirá a resposta do servidor com o prefixo "TCP:" ou "UDP:" de acordo com o protocolo escolhido.
+1. Abra um terminal na pasta onde os arquivos estão salvos.
+2. Inicie o servidor com o comando:
 
-Exemplo de Funcionamento
-1. Executando o Servidor
-No terminal do servidor, você deve ver algo semelhante ao seguinte:
+   ```bash
+   python3 servidor.py
 
-plaintext
-Copiar código
+O servidor agora estará escutando conexões TCP na porta 5000 e UDP na porta 5001.
+
+### Opção 2: Executando Servidores Separados (TCP e UDP)
+
+1. Abra dois terminais, um para cada servidor.
+2. No primeiro terminal, execute o servidor TCP:
+
+   ```bash
+   python3 servidor_tcp.py
+
+3. No segundo terminal, execute o servidor UDP:
+
+   ```bash
+   python3 servidor_udp.py
+
+### Executando o Cliente
+
+1. Abra um novo terminal para o cliente.
+2. Execute o cliente com o comando:
+
+   ```bash
+   python3 cliente.py
+
+3. O cliente solicitará que você escolha o protocolo (TCP ou UDP) e digite uma mensagem para enviar ao servidor. Após enviar, a resposta será exibida com o prefixo do protocolo escolhido.
+
+
+### Exemplo
+
+Após iniciar o servidor, você verá mensagens indicando que ele está escutando nas portas:
+
+   ```bash
 Servidor TCP escutando na porta 5000!
 Servidor UDP escutando na porta 5001!
-Quando um cliente se conecta, o servidor exibe a mensagem recebida e a resposta enviada.
+```
 
-2. Enviando uma Mensagem do Cliente
-Ao executar cliente.py, digite o protocolo desejado (TCP ou UDP) e a mensagem que deseja enviar. Por exemplo:
+Quando o cliente envia uma mensagem, o servidor exibe o conteúdo e o endereço do cliente.
 
-plaintext
-Copiar código
+### No Cliente
+Ao executar o cliente, selecione o protocolo e insira uma mensagem. Exemplo:
+
+   ```bash
 Digite o protocolo (TCP ou UDP): TCP
 Digite a mensagem a ser enviada: Olá, servidor!
-O cliente exibirá a resposta do servidor, como:
-
-plaintext
-Copiar código
 Resposta do servidor: TCP: Olá, servidor!
-Observações
-Para testar o sistema com múltiplos clientes, você pode abrir várias janelas de terminal e executar cliente.py em cada uma, selecionando protocolos e enviando mensagens.
-Certifique-se de que o servidor (servidor.py) esteja em execução antes de iniciar o cliente (cliente.py).
+```
